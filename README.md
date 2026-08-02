@@ -1,5 +1,7 @@
 # Простая система частиц SFML
 
+**Русский** | [English](README_EN.md)
+
 ![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=cplusplus)
 ![SFML](https://img.shields.io/badge/SFML-2.6.x-8CC445)
 
