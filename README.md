@@ -1,17 +1,52 @@
-Path to the SFML library folder: C:\IT\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1
+# Простая система частиц SFML
 
-Visual Studio -> Run Debug x64
+![C++](https://img.shields.io/badge/C%2B%2B-17-00599C?logo=cplusplus)
+![SFML](https://img.shields.io/badge/SFML-2.6.x-8CC445)
 
-Visual Studio -> Run Release x64
+Компактный учебный пример системы частиц без текстур и шейдеров. Частицы
+хранят положение, скорость и цвет, а для эффективной отрисовки собираются в
+один `sf::VertexArray` с примитивом `sf::Points`.
 
-Path to the SFML 2.6.1 (Visual C++ 17 (2022) — 64-бит) library folder: C:\IT\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1
+## Демонстрация
 
-Catalog of books with folders with CMakeLists.txt
+Нажмите и удерживайте **левую кнопку мыши**. В точке первого нажатия появится
+поток частиц со случайными направлениями, скоростью и цветом. Частицы, которые
+покинули окно, автоматически удаляются.
 
-cmake -S . -B build
+## Что можно изучить по коду
 
+- наследование от `sf::Drawable` и `sf::Transformable`;
+- собственный метод `draw()` для игрового объекта;
+- отрисовку большого числа точек одним вызовом;
+- движение независимо от FPS с помощью `sf::Time`;
+- генерацию случайных вещественных и целых значений;
+- синхронизацию массива частиц с массивом вершин;
+- удаление объектов за пределами экрана.
+
+## Структура
+
+- `MyParticleSystem.cpp` — окно, ввод и создание частиц;
+- `ParticleSystem.h` — структуры данных и интерфейс системы;
+- `ParticleSystem.cpp` — добавление, обновление и отрисовка.
+
+## Сборка через CMake
+
+```powershell
+cmake -S . -B build -DBUILD_SHARED_LIBS=OFF
 cmake --build build --config Release
+./build/Release/MyParticleSystem.exe
+```
 
-cmake --build build --config Debug
+При первой конфигурации CMake загрузит SFML 2.6.x через `FetchContent`.
 
-Project Tetris to assign as a startup project
+Также можно открыть `MyParticleSystem.sln` в Visual Studio 2022. Если SFML
+установлена не в `C:\IT\SFML-2.6.1-windows-vc17-64-bit\SFML-2.6.1`, измените
+пути включения и библиотек в свойствах проекта.
+
+## Идеи для экспериментов
+
+- добавить время жизни и плавное исчезновение;
+- перемещать эмиттер вслед за курсором;
+- применить гравитацию и сопротивление;
+- заменить точки на текстурированные квады;
+- использовать object pool, чтобы сократить выделения памяти.
